@@ -73,5 +73,8 @@ class MsgQueue():
         return self.maxT
         
     def show(self):
-        print(self.heap)
+        print('[',end='')
+        for item in self.heap:
+            print(str(item.item)+',',end='')
+        print(']')
         
