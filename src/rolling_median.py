@@ -52,11 +52,14 @@ if __name__ == '__main__':
         fout = open(foutname, 'w')
         engine = StreamEngine(60)
         for line in fin:
-            result = json.loads(line)
-            actor = result['actor']
-            target = result['target']
-            tstr = result['created_time']
-            t = time.mktime(time.strptime(tstr, '%Y-%m-%dT%H:%M:%SZ'))
-            fout.write("%.2f\n"%((engine.processPayment((actor, target, t)))))
+            try:
+                result = json.loads(line)
+                actor = result['actor']
+                target = result['target']
+                tstr = result['created_time']
+                t = time.mktime(time.strptime(tstr, '%Y-%m-%dT%H:%M:%SZ'))
+                fout.write("%.2f\n"%((engine.processPayment((actor, target, t)))))
+            except:
+                pass
         fin.close()
         fout.close()
